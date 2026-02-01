@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SkillCategory } from '../types';
 
 const getToolLogo = (toolName: string): string | null => {
@@ -34,6 +34,12 @@ const getToolLogo = (toolName: string): string | null => {
     'Mixpanel': 'https://cdn.simpleicons.org/mixpanel/7856FF',
     'Python': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
     'APIs': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/openapi/openapi-original.svg',
+    'Miro': 'https://cdn.simpleicons.org/miro/050038',
+    'Loom': 'https://cdn.simpleicons.org/loom/625DF5',
+    'Slack': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg',
+    'Google Analytics': 'https://cdn.simpleicons.org/googleanalytics/E37400',
+    'Hotjar': 'https://cdn.simpleicons.org/hotjar/FF3C00',
+    'Looker': 'https://cdn.simpleicons.org/looker/4285F4',
   };
 
   return logoMap[toolName] || null;
@@ -46,27 +52,27 @@ const skillsData: SkillCategory[] = [
     icon: 'smart_toy',
     skills: [
       'Product Strategy & Vision',
-      'Product Development',
       'Product Discovery',
       'Roadmapping & Prioritization',
-      'OKRs & Strategic Planning',
-      'PRDs & Product Documentation',
       'Agile & Scrum Methodologies',
-      'Experimentation & A/B Testing',
       'Data-Driven Decision Making',
-      'Product Design & Wireframing',
-      'Communication & Storytelling',
       'Stakeholder Management',
-      'Team Leadership & Collaboration',
-      'Scaling Startups',
-      'Time Management & Execution',
-      'Problem Solving & Critical Thinking',
+      'A/B Testing & Experimentation',
+      'PRDs & Documentation',
+      'User Research & Interviews',
+      'Market Analysis',
+      'Competitive Analysis',
+      'Go-to-Market Strategy',
+      'OKRs & KPIs',
+      'Cross-functional Leadership',
+      'Technical Requirements',
+      'API Product Management',
       'Agentic AI Systems',
-      'LLM Agents & Multi-Agent Systems',
-      'ReAct Prompting',
-      'Chain-of-Thought Prompting',
       'AI Prototyping',
-      'Vibe Coding'
+      'Prompt Engineering',
+      'LLM Integration',
+      'AI/ML Product Strategy',
+      'Conversational AI Design'
     ]
   },
   {
@@ -74,16 +80,65 @@ const skillsData: SkillCategory[] = [
     title: 'Tools',
     icon: 'palette',
     skills: [
-      'Supabase', 'Jira', 'Trello', 'Notion', 'Confluence', 'Figma', 'Figma Make',
-      'Postman', 'Swagger', 'Metabase', 'MySQL', 'MongoDB', 'SQL', 'Elasticsearch',
-      'Cursor', 'GitHub', 'Replit', 'Firebase', 'OpenAI', 'Gemini',
-      'Claude Code', 'Perplexity', 'Lovable', 'n8n', 'Zapier',
-      'RudderStack', 'Stitch', 'Amplitude', 'Mixpanel', 'Python', 'APIs'
+      'Cursor',
+      'Supabase',
+      'Jira',
+      'Mixpanel',
+      'Claude Code',
+      'Figma',
+      'Stitch',
+      'Amplitude',
+      'APIs',
+      'Lovable',
+      'Metabase',
+      'Elasticsearch',
+      'Trello',
+      'Notion',
+      'Confluence',
+      'Figma Make',
+      'Miro',
+      'Loom',
+      'Slack',
+      'Postman',
+      'Swagger',
+      'SQL',
+      'MySQL',
+      'MongoDB',
+      'Looker',
+      'Google Analytics',
+      'Hotjar',
+      'GitHub',
+      'Python',
+      'OpenAI',
+      'Gemini',
+      'Perplexity',
+      'Replit',
+      'n8n',
+      'Zapier',
+      'RudderStack',
+      'Firebase'
     ]
   }
 ];
 
+const VISIBLE_COUNT_PRODUCT_AI = 6;
+const VISIBLE_COUNT_TOOLS = 12;
+
 const Skills: React.FC = () => {
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId);
+      } else {
+        newSet.add(categoryId);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <section id="skills" className="py-16 md:py-24 px-6 bg-bg-base">
       <div className="max-w-[960px] mx-auto">
@@ -93,37 +148,55 @@ const Skills: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
-          {skillsData.map((category) => (
-            <div key={category.id} className="space-y-5">
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-accent text-xl">{category.icon}</span>
-                <h4 className="font-semibold text-sm text-text-primary">{category.title}</h4>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => {
-                  const logoUrl = category.id === 'tools' ? getToolLogo(skill) : null;
-                  return (
-                    <span
-                      key={skill}
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs bg-bg-surface text-text-secondary border border-border-subtle hover:border-accent/40 hover:text-text-primary transition-all duration-200"
-                    >
-                      {logoUrl ? (
-                        <img
-                          src={logoUrl}
-                          alt={skill}
-                          className="w-4 h-4 object-contain flex-shrink-0"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                      ) : null}
-                      <span>{skill}</span>
+          {skillsData.map((category) => {
+            const isExpanded = expandedCategories.has(category.id);
+            const visibleCount = category.id === 'product-ai' ? VISIBLE_COUNT_PRODUCT_AI : VISIBLE_COUNT_TOOLS;
+            const visibleSkills = isExpanded ? category.skills : category.skills.slice(0, visibleCount);
+            const hasMore = category.skills.length > visibleCount;
+
+            return (
+              <div key={category.id} className="space-y-5">
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-accent text-xl">{category.icon}</span>
+                  <h4 className="font-semibold text-sm text-text-primary">{category.title}</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {visibleSkills.map((skill) => {
+                    const logoUrl = category.id === 'tools' ? getToolLogo(skill) : null;
+                    return (
+                      <span
+                        key={skill}
+                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs bg-bg-surface text-text-secondary border border-border-subtle hover:border-accent/40 hover:text-text-primary transition-all duration-200"
+                      >
+                        {logoUrl ? (
+                          <img
+                            src={logoUrl}
+                            alt={skill}
+                            className="w-4 h-4 object-contain flex-shrink-0"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        ) : null}
+                        <span>{skill}</span>
+                      </span>
+                    );
+                  })}
+                </div>
+                {hasMore && (
+                  <button
+                    onClick={() => toggleCategory(category.id)}
+                    className="inline-flex items-center gap-1.5 text-xs text-text-secondary hover:text-accent transition-colors duration-200"
+                  >
+                    <span className="material-symbols-outlined text-sm">
+                      {isExpanded ? 'expand_less' : 'expand_more'}
                     </span>
-                  );
-                })}
+                    <span>{isExpanded ? 'View less' : `View more (${category.skills.length - visibleCount})`}</span>
+                  </button>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

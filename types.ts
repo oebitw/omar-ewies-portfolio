@@ -6,6 +6,7 @@ export interface ExperienceItem {
   period: string;
   logoUrl: string;
   companyUrl?: string;
+  keyMetrics?: string[];
   achievements: string[];
 }
 
@@ -28,4 +29,22 @@ export interface CertificationItem {
   id: string;
   title: string;
   issuer: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  metrics?: string[];
+  tags?: string[];
+  status?: 'in-progress' | 'completed';
+  expectedOutcomes?: string[];
+}
+
+export interface CompanyProjects {
+  companyId: string;
+  companyName: string;
+  companyLogo: string;
+  projects: Project[];
 }
