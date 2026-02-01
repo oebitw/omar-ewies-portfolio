@@ -2,13 +2,12 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Omar Ewies | Senior Product Manager</title>
     <link rel="icon" type="image/jpeg" href="/omar-ewies-portfolio/assets/favicon-Yx16Nf6j.jpg" />
     <link rel="apple-touch-icon" href="/omar-ewies-portfolio/assets/favicon-Yx16Nf6j.jpg" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script>
         tailwind.config = {
@@ -16,27 +15,38 @@
             theme: {
                 extend: {
                     colors: {
-                        // Professional corporate palette
-                        "primary": "#093056",        // Deep corporate navy
-                        "primary-light": "#0d4070",  // Lighter navy: Hover states
-                        "accent": "#4a90c2",         // Soft blue: Text highlights, links
-                        "background-dark": "#0a0e14", // Near black
-                        "surface-dark": "#12181f",   // Elevated surface
-                        "surface-light": "#1a2028",  // Cards, sections
-                        "border-dark": "#232d38",    // Subtle borders
+                        // New dark mode palette
+                        "bg-base": "#0d0d14",
+                        "bg-elevated": "#141420",
+                        "bg-surface": "#1a1a28",
+                        "accent": "#4f8cff",
+                        "accent-muted": "#3d6cb8",
+                        "border-subtle": "#2a2a3c",
+                        "border-active": "#3d3d54",
+                        "text-primary": "#f5f5f7",
+                        "text-secondary": "#a1a1aa",
+                        "text-muted": "#6b6b7b",
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"],
                         "sans": ["Inter", "sans-serif"],
-                        "serif": ["Cinzel", "serif"]
                     },
                     animation: {
                         'shimmer': 'shimmer 2.5s infinite',
+                        'fadeInUp': 'fadeInUp 0.5s ease-out',
+                        'pulse-dot': 'pulse-dot 2s ease-in-out infinite',
                     },
                     keyframes: {
                         shimmer: {
                             '0%': { transform: 'translateX(-100%)' },
                             '100%': { transform: 'translateX(100%)' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        'pulse-dot': {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.6', transform: 'scale(1.2)' }
                         }
                     }
                 },
@@ -47,20 +57,57 @@
         body {
             font-family: 'Inter', sans-serif;
             letter-spacing: -0.01em;
+            background-color: #0d0d14;
+            /* iOS safe area support */
+            padding-bottom: env(safe-area-inset-bottom);
         }
+
+        /* Glass morphism nav */
         .glass-nav {
             backdrop-filter: blur(20px);
-            background-color: rgba(10, 14, 20, 0.95);
-            border-bottom: 1px solid rgba(35, 45, 56, 0.5);
+            -webkit-backdrop-filter: blur(20px);
+            background-color: rgba(13, 13, 20, 0.85);
+            border-bottom: 1px solid rgba(42, 42, 60, 0.5);
         }
-        /* Mobile nav scrollbar hidden */
-        .mobile-nav::-webkit-scrollbar { display: none; }
-        .mobile-nav { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Bottom tab bar glass */
+        .glass-tab-bar {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background-color: rgba(20, 20, 32, 0.92);
+            border-top: 1px solid rgba(42, 42, 60, 0.5);
+        }
+
+        /* Hover lift effect */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(79, 140, 255, 0.1);
+        }
+
         /* Smooth scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0e14; }
-        ::-webkit-scrollbar-thumb { background: #232d38; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2d3a48; }
+        ::-webkit-scrollbar-track { background: #0d0d14; }
+        ::-webkit-scrollbar-thumb { background: #2a2a3c; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3d3d54; }
+
+        /* Animation classes */
+        .animate-in {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        /* Safe area padding for iOS bottom tab bar */
+        .safe-bottom {
+            padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+        }
+
+        @media (min-width: 768px) {
+            .safe-bottom {
+                padding-bottom: 0;
+            }
+        }
     </style>
 
 <link rel="stylesheet" href="/index.css">
@@ -73,9 +120,9 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/omar-ewies-portfolio/assets/index-D7TCdmMd.js"></script>
+  <script type="module" crossorigin src="/omar-ewies-portfolio/assets/index-BmEA9hpK.js"></script>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary/30 selection:text-white">
+<body class="bg-bg-base text-text-primary selection:bg-accent/30 selection:text-white">
     <div id="root"></div>
 </body>
 </html>
