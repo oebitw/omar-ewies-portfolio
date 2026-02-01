@@ -3,55 +3,55 @@ import profileImage from '../omar-profile.png';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative flex items-center py-12 pt-32 md:pt-28 md:py-16">
-      <div className="max-w-[1100px] mx-auto px-6 w-full">
-        <div className="flex flex-row items-center gap-8 sm:gap-12 md:gap-16 lg:gap-24">
+    <section className="relative min-h-[85vh] md:min-h-0 flex items-center py-16 md:pt-28 md:py-24 px-6">
+      <div className="max-w-[960px] mx-auto w-full">
+        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+          {/* Profile Image - First on mobile */}
+          <div className="flex-shrink-0 order-1 md:order-2">
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 group">
+              <div className="absolute inset-0 rounded-full border border-border-subtle scale-[1.08] opacity-50"></div>
+              <div className="relative w-full h-full rounded-full overflow-hidden border border-border-subtle bg-bg-elevated transition-transform duration-300 group-hover:scale-105">
+                <img
+                  alt="Omar Ewies"
+                  className="w-full h-full object-cover object-center"
+                  src={profileImage}
+                />
+              </div>
+            </div>
+          </div>
+
           {/* Content */}
-          <div className="flex-1 space-y-6 sm:space-y-8">
-            <div className="space-y-4 sm:space-y-5">
-              <span className="inline-block text-accent text-[11px] sm:text-xs font-medium uppercase tracking-[0.2em]">
+          <div className="flex-1 text-center md:text-left order-2 md:order-1">
+            <div className="space-y-5">
+              <span className="inline-block text-accent text-xs font-medium uppercase tracking-wider">
                 Senior Product Manager
               </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-text-primary">
                 Omar Ewies
               </h1>
-              <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed max-w-lg">
+              <p className="text-base md:text-lg leading-relaxed text-text-secondary max-w-lg mx-auto md:mx-0">
                 Driving B2B & B2C Innovation with 6+ years of experience building user-centric digital products across the Middle East.
               </p>
             </div>
-            
+
             {/* CTAs */}
-            <div className="flex items-center gap-4 pt-2">
-              <button 
+            <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-8">
+              <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}
-                className="inline-flex items-center gap-2.5 bg-primary hover:bg-primary-light text-white font-medium px-6 py-3 rounded text-sm transition-all duration-300"
+                className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-muted text-white font-medium px-6 py-3.5 rounded-lg text-sm transition-all duration-300 w-full sm:w-auto justify-center"
               >
                 <span className="material-symbols-outlined text-lg">handshake</span>
                 <span>Get in Touch</span>
               </button>
-              
-              <a 
-                href="/cv.pdf"
+
+              <a
+                href="cv-omar-ewies.pdf"
                 download="Omar_Ewies_CV.pdf"
-                className="inline-flex items-center gap-2 text-gray-400 hover:text-accent text-sm font-medium transition-colors duration-300"
+                className="inline-flex items-center gap-2 text-text-secondary hover:text-accent text-sm font-medium transition-colors duration-300 py-3"
               >
                 <span className="material-symbols-outlined text-lg">download</span>
                 <span>Download CV</span>
               </a>
-            </div>
-          </div>
-          
-          {/* Profile Image */}
-          <div className="flex-shrink-0">
-            <div className="relative w-32 h-32 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-72 lg:h-72">
-              <div className="absolute inset-0 rounded-full border border-gray-700/30 scale-[1.08]"></div>
-              <div className="relative w-full h-full rounded-full overflow-hidden border border-gray-700/50 bg-surface-dark">
-                <img 
-                  alt="Omar Ewies" 
-                  className="w-full h-full object-cover object-center" 
-                  src={profileImage}
-                />
-              </div>
             </div>
           </div>
         </div>

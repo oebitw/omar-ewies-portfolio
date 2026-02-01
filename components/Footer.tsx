@@ -2,12 +2,10 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-8 border-t border-gray-800/50 bg-background-dark">
-      <div className="max-w-[1100px] mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p className="text-sm text-gray-500">© 2026 Omar Ewies. All rights reserved.</p>
-        <p className="text-xs text-gray-600 tracking-wide">
-          Crafted with precision
-        </p>
+    <footer className="py-8 md:py-10 border-t border-border-subtle bg-bg-base pb-24 md:pb-10">
+      <div className="max-w-[960px] mx-auto px-6 text-center">
+        <p className="text-sm text-text-secondary mb-2">Omar Ewies</p>
+        <p className="text-xs text-text-muted">Crafted with precision</p>
       </div>
     </footer>
   );

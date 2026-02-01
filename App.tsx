@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import BottomTabBar from './components/BottomTabBar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -10,9 +11,9 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-background-dark text-gray-100 selection:bg-primary/30 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-bg-base text-text-primary selection:bg-accent/30 selection:text-white overflow-x-hidden">
       <Navbar />
-      <main>
+      <main className="pb-20 md:pb-0">
         <Hero />
         <About />
         <Experience />
@@ -21,6 +22,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <BottomTabBar />
     </div>
   );
 }

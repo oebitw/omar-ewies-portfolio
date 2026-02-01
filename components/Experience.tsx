@@ -50,7 +50,7 @@ const experienceData: ExperienceItem[] = [
     achievements: [
       'Enhanced Foodics Online Ordering Applications, driving a <span class="text-accent font-medium">15% mobile conversion rate</span> and <span class="text-accent font-medium">7% web conversion rate</span>.',
       'Increased monthly orders from <span class="text-accent font-medium">350K to 500K</span>, boosting monthly GMV from <span class="text-accent font-medium">$5.5M to $8M</span> through strategic product enhancements and user-focused initiatives.',
-      'Delivered custom ordering applications for popular brands, like ½ M, Dunkin\' Donuts, and Herfy.',
+      'Delivered custom ordering applications for popular brands, like 1/2 M, Dunkin\' Donuts, and Herfy.',
       'Led a comprehensive revamp of Foodics Marketplace (integrations marketplace), streamlining the integration\'s stability and usability.',
       'Building integrations with leading food aggregators, delivery companies, and payment gateways to expand market reach.'
     ]
@@ -75,24 +75,29 @@ const experienceData: ExperienceItem[] = [
 
 const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-12 md:py-16 bg-surface-dark/40">
-      <div className="max-w-[1100px] mx-auto px-6">
+    <section id="experience" className="py-16 md:py-24 px-6 bg-bg-elevated">
+      <div className="max-w-[960px] mx-auto">
         <div className="mb-12">
-          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">Experience</p>
-          <h2 className="text-2xl md:text-3xl font-semibold text-white">Professional Journey</h2>
+          <p className="text-xs font-medium uppercase tracking-wider text-accent mb-3">Experience</p>
+          <h2 className="text-2xl md:text-3xl font-semibold text-text-primary">Professional Journey</h2>
         </div>
-        
+
         <div className="space-y-6">
           {experienceData.map((item) => (
-            <div key={item.id} className="group bg-surface-light/50 border border-gray-800/50 hover:border-accent/30 rounded-lg p-6 md:p-8 transition-all duration-300">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-5">
+            <div
+              key={item.id}
+              className="group bg-bg-surface border border-border-subtle hover:border-border-active rounded-xl p-6 md:p-8 transition-all duration-300 hover-lift"
+            >
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="size-12 bg-white rounded-lg flex items-center justify-center p-2 shadow-sm">
-                    <img className="w-full object-contain" src={item.logoUrl} alt={`Logo for ${item.company}`} />
+                  <div className="size-14 bg-white rounded-xl flex items-center justify-center p-2.5 shadow-sm">
+                    <img className="w-full h-full object-contain" src={item.logoUrl} alt={`Logo for ${item.company}`} />
                   </div>
                   <div>
-                    <h3 className="text-base md:text-lg font-medium text-white group-hover:text-accent transition-colors duration-300">{item.role}</h3>
-                    <p className="text-gray-500 text-sm">
+                    <h3 className="text-base md:text-lg font-semibold text-text-primary group-hover:text-accent transition-colors duration-300">
+                      {item.role}
+                    </h3>
+                    <p className="text-text-muted text-sm">
                       {item.companyUrl ? (
                         <a href={item.companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                           {item.company}
@@ -104,15 +109,15 @@ const Experience: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <span className="text-xs text-gray-500 tracking-wide">
+                <span className="text-xs text-text-muted tracking-wide bg-bg-elevated px-3 py-1.5 rounded-full">
                   {item.period}
                 </span>
               </div>
-              
-              <ul className="space-y-2.5 pl-1">
+
+              <ul className="space-y-3 pl-1">
                 {item.achievements.map((achievement, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-gray-400 text-sm leading-relaxed">
-                    <span className="text-accent/60 mt-1.5 text-[8px]">●</span>
+                  <li key={idx} className="flex items-start gap-3 text-text-secondary text-sm leading-relaxed">
+                    <span className="text-accent mt-2 text-[6px]">●</span>
                     <span dangerouslySetInnerHTML={{ __html: achievement }}></span>
                   </li>
                 ))}

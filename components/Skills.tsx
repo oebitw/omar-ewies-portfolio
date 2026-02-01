@@ -1,7 +1,6 @@
 import React from 'react';
 import { SkillCategory } from '../types';
 
-// Tool logo mapping - using colored logos
 const getToolLogo = (toolName: string): string | null => {
   const logoMap: { [key: string]: string } = {
     'Supabase': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg',
@@ -36,7 +35,7 @@ const getToolLogo = (toolName: string): string | null => {
     'Python': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
     'APIs': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/openapi/openapi-original.svg',
   };
-  
+
   return logoMap[toolName] || null;
 };
 
@@ -75,10 +74,10 @@ const skillsData: SkillCategory[] = [
     title: 'Tools',
     icon: 'palette',
     skills: [
-      'Supabase', 'Jira', 'Trello', 'Notion', 'Confluence', 'Figma', 'Figma Make', 
-      'Postman', 'Swagger', 'Metabase', 'MySQL', 'MongoDB', 'SQL', 'Elasticsearch', 
-      'Cursor', 'GitHub', 'Replit', 'Firebase', 'OpenAI', 'Gemini', 
-      'Claude Code', 'Perplexity', 'Lovable', 'n8n', 'Zapier', 
+      'Supabase', 'Jira', 'Trello', 'Notion', 'Confluence', 'Figma', 'Figma Make',
+      'Postman', 'Swagger', 'Metabase', 'MySQL', 'MongoDB', 'SQL', 'Elasticsearch',
+      'Cursor', 'GitHub', 'Replit', 'Firebase', 'OpenAI', 'Gemini',
+      'Claude Code', 'Perplexity', 'Lovable', 'n8n', 'Zapier',
       'RudderStack', 'Stitch', 'Amplitude', 'Mixpanel', 'Python', 'APIs'
     ]
   }
@@ -86,36 +85,34 @@ const skillsData: SkillCategory[] = [
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="py-12 md:py-16 bg-background-dark">
-      <div className="max-w-[1100px] mx-auto px-6">
+    <section id="skills" className="py-16 md:py-24 px-6 bg-bg-base">
+      <div className="max-w-[960px] mx-auto">
         <div className="mb-12">
-          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">Skills</p>
-          <h2 className="text-2xl md:text-3xl font-semibold text-white">Core Competencies</h2>
+          <p className="text-xs font-medium uppercase tracking-wider text-accent mb-3">Skills</p>
+          <h2 className="text-2xl md:text-3xl font-semibold text-text-primary">Core Competencies</h2>
         </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
           {skillsData.map((category) => (
-            <div key={category.id} className="space-y-4">
-              <div className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-accent/80 text-xl">{category.icon}</span>
-                <h4 className="font-medium text-sm text-gray-300">{category.title}</h4>
+            <div key={category.id} className="space-y-5">
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-accent text-xl">{category.icon}</span>
+                <h4 className="font-semibold text-sm text-text-primary">{category.title}</h4>
               </div>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => {
                   const logoUrl = category.id === 'tools' ? getToolLogo(skill) : null;
                   return (
-                    <span 
-                      key={skill} 
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded text-xs bg-surface-light/50 text-gray-400 border border-gray-800/50 hover:border-accent/30 hover:text-gray-300 transition-colors duration-300"
+                    <span
+                      key={skill}
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs bg-bg-surface text-text-secondary border border-border-subtle hover:border-accent/40 hover:text-text-primary transition-all duration-200"
                     >
                       {logoUrl ? (
-                        <img 
-                          src={logoUrl} 
+                        <img
+                          src={logoUrl}
                           alt={skill}
                           className="w-4 h-4 object-contain flex-shrink-0"
-                          style={{ filter: 'none', imageRendering: 'auto' }}
                           onError={(e) => {
-                            // Hide image if it fails to load
                             e.currentTarget.style.display = 'none';
                           }}
                         />
