@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { trackNavigation, trackConversion } from '../utils/analytics';
 
 const Navbar: React.FC = () => {
+  const [activeSection, setActiveSection] = useState('about');
+
+  const navItems = ['About', 'Experience', 'Skills', 'Education', 'Contact'];
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    navItems.forEach((item) => {
+      const element = document.getElementById(item.toLowerCase());
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToSection = (id: string) => {
     trackNavigation(id);
     const element = document.getElementById(id);
@@ -14,8 +45,6 @@ const Navbar: React.FC = () => {
     trackConversion('cv_download', { source: 'navbar' });
   };
 
-  const navItems = ['About', 'Experience', 'Skills', 'Education', 'Contact'];
-
   return (
     <nav className="fixed top-0 w-full z-50 glass-nav">
       <div className="max-w-[960px] mx-auto">
@@ -25,7 +54,11 @@ const Navbar: React.FC = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-xs md:text-sm text-text-secondary hover:text-text-primary transition-colors duration-300"
+                className={`text-xs md:text-sm transition-colors duration-300 ${
+                  activeSection === item.toLowerCase()
+                    ? 'text-accent font-medium'
+                    : 'text-text-secondary hover:text-text-primary'
+                }`}
               >
                 {item}
               </button>
