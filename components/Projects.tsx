@@ -146,12 +146,12 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-border-subtle pb-4">
+        <div className="flex gap-2 mb-8 border-b border-border-subtle pb-4 overflow-x-auto scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
           {projectsData.map((company) => (
             <button
               key={company.companyId}
               onClick={() => handleTabClick(company.companyId, company.companyName)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
                 activeTab === company.companyId
                   ? 'bg-accent text-white'
                   : 'bg-bg-base text-text-secondary hover:text-text-primary hover:bg-bg-base/80 border border-border-subtle'
