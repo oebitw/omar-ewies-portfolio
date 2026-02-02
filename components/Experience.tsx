@@ -4,6 +4,7 @@ import nanaLogo from '../nana.webp';
 import mrsoolLogo from '../mrsool.png';
 import foodicsLogo from '../foodics.png';
 import servicioLogo from '../servicio.jpeg';
+import { trackEngagement } from '../utils/analytics';
 
 const experienceData: ExperienceItem[] = [
   {
@@ -14,6 +15,11 @@ const experienceData: ExperienceItem[] = [
     period: '2025 - Present',
     logoUrl: nanaLogo,
     companyUrl: 'https://nana.sa/',
+    keyMetrics: [
+      '+10% AOV through basket-size promotions',
+      '+16% search conversion with semantic search',
+      '60% reduction in zero-result queries'
+    ],
     achievements: [
       'Led the strategy and execution of Nana\'s Checkout Squad, optimizing the checkout flow to drive higher conversion.',
       'Increased Average Order Value (AOV) by <span class="text-accent font-medium">10%</span> through basket-size promotions and bundled offers that encouraged multi-item purchases.',
@@ -31,6 +37,11 @@ const experienceData: ExperienceItem[] = [
     period: '2024 - 2025',
     logoUrl: mrsoolLogo,
     companyUrl: 'https://www.mrsool.co/home/',
+    keyMetrics: [
+      '+14% AOV for Mrsool Grocery',
+      'SAR 1.5M monthly GMV from Public APIs',
+      'Order Failure Rate: 3% → 0.6%'
+    ],
     achievements: [
       'Led integrations with groceries, pharmacies, enterprise restaurants, and aggregator systems, driving streamlined operations and enhancing partner efficiency.',
       'Owned and managed Mrsool Grocery service (magady), achieving a <span class="text-accent font-medium">14% increase</span> in Average Order Value (AOV) through strategic product optimization and enhanced user engagement.',
@@ -47,6 +58,11 @@ const experienceData: ExperienceItem[] = [
     period: '2021 - 2024',
     logoUrl: foodicsLogo,
     companyUrl: 'https://www.foodics.com/',
+    keyMetrics: [
+      'GMV: $5.5M → $8M monthly',
+      'Orders: 350K → 500K monthly',
+      '15% mobile conversion rate'
+    ],
     achievements: [
       'Enhanced Foodics Online Ordering Applications, driving a <span class="text-accent font-medium">15% mobile conversion rate</span> and <span class="text-accent font-medium">7% web conversion rate</span>.',
       'Increased monthly orders from <span class="text-accent font-medium">350K to 500K</span>, boosting monthly GMV from <span class="text-accent font-medium">$5.5M to $8M</span> through strategic product enhancements and user-focused initiatives.',
@@ -63,6 +79,11 @@ const experienceData: ExperienceItem[] = [
     period: '2018 - 2020',
     logoUrl: servicioLogo,
     companyUrl: 'https://www.linkedin.com/company/serviciome/',
+    keyMetrics: [
+      'Built product from 0 to 1',
+      'Launched 5 service categories',
+      '24/7 emergency services capability'
+    ],
     achievements: [
       'Built the home services application from <span class="text-accent font-medium">0 to 1</span>, leading product strategy, design, and development from concept to launch.',
       'Designed and implemented core features including service booking, provider matching, real-time tracking, and secure payment processing.',
@@ -75,7 +96,7 @@ const experienceData: ExperienceItem[] = [
 
 const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-16 md:py-24 px-6 bg-bg-elevated">
+    <section id="experience" className="py-8 md:py-12 px-6 bg-bg-elevated">
       <div className="max-w-[960px] mx-auto">
         <div className="mb-12">
           <p className="text-xs font-medium uppercase tracking-wider text-accent mb-3">Experience</p>
@@ -99,7 +120,13 @@ const Experience: React.FC = () => {
                     </h3>
                     <p className="text-text-muted text-sm">
                       {item.companyUrl ? (
-                        <a href={item.companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                        <a
+                          href={item.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-accent transition-colors"
+                          onClick={() => trackEngagement('company_link_click', { company: item.company, url: item.companyUrl })}
+                        >
                           {item.company}
                         </a>
                       ) : (
@@ -113,6 +140,24 @@ const Experience: React.FC = () => {
                   {item.period}
                 </span>
               </div>
+
+              {/* Key Impact Metrics Box */}
+              {item.keyMetrics && item.keyMetrics.length > 0 && (
+                <div className="mb-6 p-4 rounded-lg bg-accent/10 border border-accent/20">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="material-symbols-outlined text-accent text-lg">target</span>
+                    <span className="text-sm font-semibold text-accent">Key Impact</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {item.keyMetrics.map((metric, idx) => (
+                      <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-bg-base/50 text-text-primary border border-border-subtle">
+                        <span className="text-accent">•</span>
+                        {metric}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <ul className="space-y-3 pl-1">
                 {item.achievements.map((achievement, idx) => (

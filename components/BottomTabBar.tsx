@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { trackEvent } from '../utils/analytics';
 
 interface TabItem {
   id: string;
@@ -45,6 +46,7 @@ const BottomTabBar: React.FC = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
+    trackEvent('mobile_nav_click', 'navigation', { section: id });
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

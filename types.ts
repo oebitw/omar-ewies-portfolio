@@ -39,6 +39,7 @@ export interface Project {
   metrics?: string[];
   tags?: string[];
   status?: 'in-progress' | 'completed';
+  vibeCoding?: boolean;
   expectedOutcomes?: string[];
 }
 

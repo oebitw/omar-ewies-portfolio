@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SkillCategory } from '../types';
+import { trackEngagement } from '../utils/analytics';
 
 const getToolLogo = (toolName: string): string | null => {
   const logoMap: { [key: string]: string } = {
@@ -127,20 +128,22 @@ const VISIBLE_COUNT_TOOLS = 12;
 const Skills: React.FC = () => {
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
 
-  const toggleCategory = (categoryId: string) => {
+  const toggleCategory = (categoryId: string, categoryTitle: string) => {
     setExpandedCategories(prev => {
       const newSet = new Set(prev);
       if (newSet.has(categoryId)) {
         newSet.delete(categoryId);
+        trackEngagement('skills_collapse', { category: categoryTitle });
       } else {
         newSet.add(categoryId);
+        trackEngagement('skills_expand', { category: categoryTitle });
       }
       return newSet;
     });
   };
 
   return (
-    <section id="skills" className="py-16 md:py-24 px-6 bg-bg-base">
+    <section id="skills" className="py-8 md:py-12 px-6 bg-bg-base">
       <div className="max-w-[960px] mx-auto">
         <div className="mb-12">
           <p className="text-xs font-medium uppercase tracking-wider text-accent mb-3">Skills</p>
@@ -185,7 +188,7 @@ const Skills: React.FC = () => {
                 </div>
                 {hasMore && (
                   <button
-                    onClick={() => toggleCategory(category.id)}
+                    onClick={() => toggleCategory(category.id, category.title)}
                     className="inline-flex items-center gap-1.5 text-xs text-text-secondary hover:text-accent transition-colors duration-200"
                   >
                     <span className="material-symbols-outlined text-sm">

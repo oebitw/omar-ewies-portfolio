@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EducationItem, CertificationItem } from '../types';
 
 const educationData: EducationItem[] = [
@@ -29,9 +29,14 @@ const certificationData: CertificationItem[] = [
   { id: '8', title: 'Google Analytics Individual Qualification', issuer: 'Google Digital Academy - Skillshop (08/2020)' }
 ];
 
+const VISIBLE_CERTS = 2;
+
 const Education: React.FC = () => {
+  const [showAllCerts, setShowAllCerts] = useState(false);
+  const visibleCerts = showAllCerts ? certificationData : certificationData.slice(0, VISIBLE_CERTS);
+
   return (
-    <section id="education" className="py-16 md:py-24 px-6 bg-bg-elevated">
+    <section id="education" className="py-8 md:py-12 px-6 bg-bg-elevated">
       <div className="max-w-[960px] mx-auto">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-20">
           {/* Education */}
@@ -57,7 +62,7 @@ const Education: React.FC = () => {
             <h2 className="text-2xl md:text-3xl font-semibold mb-10 text-text-primary">Certifications</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {certificationData.map((cert) => (
+              {visibleCerts.map((cert) => (
                 <div
                   key={cert.id}
                   className="bg-bg-surface border border-border-subtle p-4 rounded-xl flex items-start gap-3 hover:border-accent/30 transition-all duration-300"
@@ -70,6 +75,17 @@ const Education: React.FC = () => {
                 </div>
               ))}
             </div>
+            {certificationData.length > VISIBLE_CERTS && (
+              <button
+                onClick={() => setShowAllCerts(!showAllCerts)}
+                className="mt-4 inline-flex items-center gap-1.5 text-xs text-text-secondary hover:text-accent transition-colors duration-200"
+              >
+                <span className="material-symbols-outlined text-sm">
+                  {showAllCerts ? 'expand_less' : 'expand_more'}
+                </span>
+                <span>{showAllCerts ? 'Show less' : `Show more (${certificationData.length - VISIBLE_CERTS})`}</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

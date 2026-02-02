@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import BottomTabBar from './components/BottomTabBar';
 import Hero from './components/Hero';
@@ -9,8 +9,13 @@ import Skills from './components/Skills';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { trackPageView } from './utils/analytics';
 
 function App() {
+  useEffect(() => {
+    trackPageView();
+  }, []);
+
   return (
     <div className="min-h-screen bg-bg-base text-text-primary selection:bg-accent/30 selection:text-white overflow-x-hidden">
       <Navbar />

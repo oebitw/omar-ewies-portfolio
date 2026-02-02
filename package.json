@@ -12,6 +12,7 @@
   },
   "homepage": "https://oebitw.github.io/omar-ewies-portfolio",
   "dependencies": {
+    "@supabase/supabase-js": "^2.93.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },

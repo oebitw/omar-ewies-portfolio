@@ -1,11 +1,22 @@
 import React from 'react';
+import { trackNavigation, trackConversion, trackEvent } from '../utils/analytics';
 
 const Navbar: React.FC = () => {
   const scrollToSection = (id: string) => {
+    trackNavigation(id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleLogoClick = () => {
+    trackEvent('nav_logo_click', 'navigation');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleCVDownload = () => {
+    trackConversion('cv_download', { source: 'navbar' });
   };
 
   const navItems = ['About', 'Experience', 'Skills', 'Education', 'Contact'];
@@ -15,7 +26,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-[960px] mx-auto">
         <div className="flex items-center justify-between px-6 h-16">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={handleLogoClick}
             className="text-lg font-semibold text-text-primary hover:text-accent transition-colors duration-300"
           >
             Omar Ewies
@@ -35,6 +46,7 @@ const Navbar: React.FC = () => {
             <a
               href="cv-omar-ewies.pdf"
               download="Omar_Ewies_CV.pdf"
+              onClick={handleCVDownload}
               className="relative overflow-hidden bg-accent hover:bg-accent-muted text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors duration-300"
             >
               <span className="relative z-10 flex items-center gap-2">
