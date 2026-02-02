@@ -54,15 +54,15 @@ const BottomTabBar: React.FC = () => {
   };
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-tab-bar safe-area-bottom">
-      <div className="flex items-center justify-around h-16 px-2" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-tab-bar" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <div className="flex items-center justify-around h-14 px-2">
         {tabs.map((tab) => {
           const isActive = activeSection === tab.id;
           return (
             <button
               key={tab.id}
               onClick={() => scrollToSection(tab.id)}
-              className={`flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-colors duration-200 ${
+              className={`flex flex-col items-center justify-center flex-1 py-2 gap-0.5 transition-colors duration-200 ${
                 isActive ? 'text-accent' : 'text-text-muted'
               }`}
             >
