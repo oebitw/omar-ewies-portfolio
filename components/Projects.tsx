@@ -212,7 +212,7 @@ const Projects: React.FC = () => {
                         </span>
                       )}
                     </div>
-                    <p className="text-[11px] md:text-xs text-text-secondary leading-relaxed line-clamp-3 md:line-clamp-none">{project.description}</p>
+                    <p className="text-[11px] md:text-xs text-text-secondary leading-relaxed">{project.description}</p>
 
                     {/* Expected Outcomes - Hidden on mobile for compactness */}
                     {project.expectedOutcomes && project.expectedOutcomes.length > 0 && (
