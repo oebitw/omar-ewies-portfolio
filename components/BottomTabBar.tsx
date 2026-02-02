@@ -53,36 +53,8 @@ const BottomTabBar: React.FC = () => {
     }
   };
 
-  return (
-    <nav className="md:hidden fixed top-0 left-0 right-0 z-50 glass-nav border-b border-border-subtle" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
-      <div className="flex items-center justify-around h-14 px-2">
-        {tabs.map((tab) => {
-          const isActive = activeSection === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => scrollToSection(tab.id)}
-              className={`flex flex-col items-center justify-center flex-1 py-2 gap-0.5 transition-colors duration-200 ${
-                isActive ? 'text-accent' : 'text-text-muted'
-              }`}
-            >
-              <span
-                className={`material-symbols-outlined text-xl transition-all duration-200 ${
-                  isActive ? 'scale-110' : ''
-                }`}
-                style={{ fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}
-              >
-                {tab.icon}
-              </span>
-              <span className={`text-[10px] font-medium ${isActive ? 'text-accent' : 'text-text-muted'}`}>
-                {tab.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </nav>
-  );
+  // Hidden - using Navbar for all screen sizes now
+  return null;
 };
 
 export default BottomTabBar;
