@@ -1,5 +1,5 @@
 import React from 'react';
-import { trackNavigation, trackConversion, trackEvent } from '../utils/analytics';
+import { trackNavigation, trackConversion } from '../utils/analytics';
 
 const Navbar: React.FC = () => {
   const scrollToSection = (id: string) => {
@@ -8,11 +8,6 @@ const Navbar: React.FC = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const handleLogoClick = () => {
-    trackEvent('nav_logo_click', 'navigation');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCVDownload = () => {
@@ -24,15 +19,8 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 w-full z-50 glass-nav">
       <div className="max-w-[960px] mx-auto">
-        <div className="flex items-center justify-between px-4 md:px-6 h-14 md:h-16">
-          <button
-            onClick={handleLogoClick}
-            className="text-base md:text-lg font-semibold text-text-primary hover:text-accent transition-colors duration-300"
-          >
-            Omar Ewies
-          </button>
-
-          <div className="flex items-center gap-3 md:gap-8">
+        <div className="flex items-center justify-center px-4 md:px-6 h-14 md:h-16">
+          <div className="flex items-center gap-6 md:gap-10">
             {navItems.map((item) => (
               <button
                 key={item}
