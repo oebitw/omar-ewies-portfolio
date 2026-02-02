@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[85vh] md:min-h-0 flex items-center py-10 md:pt-24 md:py-16 px-6">
+    <section className="relative flex items-center py-8 md:pt-24 md:py-16 px-6">
       <div className="max-w-[960px] mx-auto w-full">
         <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
           {/* Profile Image - First on mobile */}
