@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { trackNavigation, trackConversion } from '../utils/analytics';
+import { trackNavigation, trackConversion, trackEvent } from '../utils/analytics';
 
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState('about');
@@ -45,11 +45,25 @@ const Navbar: React.FC = () => {
     trackConversion('cv_download', { source: 'navbar' });
   };
 
+  const handleLogoClick = () => {
+    trackEvent('nav_logo_click', 'navigation');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 glass-nav">
       <div className="max-w-[960px] mx-auto">
-        <div className="flex items-center justify-center px-4 md:px-6 h-14 md:h-16">
-          <div className="flex items-center gap-6 md:gap-10">
+        <div className="flex items-center justify-center md:justify-between px-4 md:px-6 h-14 md:h-16">
+          {/* Logo - hidden on mobile */}
+          <button
+            onClick={handleLogoClick}
+            className="hidden md:block text-lg font-semibold text-text-primary hover:text-accent transition-colors duration-300"
+          >
+            Omar Ewies
+          </button>
+
+          {/* Nav items - centered on mobile, right-aligned on desktop */}
+          <div className="flex items-center gap-6 md:gap-8">
             {navItems.map((item) => (
               <button
                 key={item}
