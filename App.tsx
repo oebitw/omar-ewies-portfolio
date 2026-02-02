@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="min-h-screen bg-bg-base text-text-primary selection:bg-accent/30 selection:text-white overflow-x-hidden">
       <Navbar />
-      <main className="pb-20 md:pb-0">
+      <main className="pt-16 md:pt-0 pb-0">
         <Hero />
         <About />
         <Experience />

@@ -54,7 +54,7 @@ const BottomTabBar: React.FC = () => {
   };
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-tab-bar" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <nav className="md:hidden fixed top-0 left-0 right-0 z-50 glass-nav border-b border-border-subtle" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
       <div className="flex items-center justify-around h-14 px-2">
         {tabs.map((tab) => {
           const isActive = activeSection === tab.id;
