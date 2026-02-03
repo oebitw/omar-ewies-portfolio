@@ -52,7 +52,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-bg-base text-text-primary selection:bg-accent/30 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-bg-base text-text-primary selection:bg-accent/30 selection:text-white overflow-x-clip">
       {/* Mobile CV Download Banner - above navbar, scrolls away */}
       <div className="md:hidden">
         <a
