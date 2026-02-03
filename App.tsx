@@ -53,9 +53,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-bg-base text-text-primary selection:bg-accent/30 selection:text-white overflow-x-hidden">
-      <Navbar />
-      {/* Mobile CV Download Banner - scrolls away */}
-      <div className="md:hidden pt-12">
+      {/* Mobile CV Download Banner - above navbar, scrolls away */}
+      <div className="md:hidden">
         <a
           href="cv-omar-ewies.pdf"
           download="Omar_Ewies_CV.pdf"
@@ -69,7 +68,8 @@ function App() {
           <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         </a>
       </div>
-      <main className="md:pt-0 pb-0">
+      <Navbar />
+      <main className="pb-0">
         <Hero />
         <About />
         <Experience />

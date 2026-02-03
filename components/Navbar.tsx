@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass-nav">
+    <nav className="sticky top-0 w-full z-50 glass-nav">
       <div className="max-w-[960px] mx-auto">
         {/* Main Nav Bar */}
         <div className="flex items-center justify-center md:justify-between px-4 md:px-6 h-12 md:h-16">
