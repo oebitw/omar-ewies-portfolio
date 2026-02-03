@@ -53,19 +53,6 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 w-full z-50 glass-nav">
       <div className="max-w-[960px] mx-auto">
-        {/* Mobile CV Download Bar - above nav tabs */}
-        <div className="flex md:hidden items-center justify-center px-4 py-2 border-b border-border-subtle/50">
-          <a
-            href="cv-omar-ewies.pdf"
-            download="Omar_Ewies_CV.pdf"
-            onClick={handleCVDownload}
-            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-muted text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-300"
-          >
-            <span className="material-symbols-outlined text-sm">download</span>
-            Download CV
-          </a>
-        </div>
-
         {/* Main Nav Bar */}
         <div className="flex items-center justify-center md:justify-between px-4 md:px-6 h-12 md:h-16">
           {/* Logo - hidden on mobile */}
